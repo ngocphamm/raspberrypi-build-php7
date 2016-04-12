@@ -23,7 +23,7 @@ make
 sudo make install
 
 # Get composer
-cd /opt/php8/bin
+cd /opt/php7/bin
 
 sudo rm -f composer.phar
 

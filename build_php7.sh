@@ -27,6 +27,6 @@ cd /opt/php7/bin
 
 sudo rm -f composer.phar
 
-sudo wget https://getcomposer.org/download/1.0.0/composer.phar
+sudo wget https://getcomposer.org/download/1.0.1/composer.phar
 
 sudo chmod +x composer.phar

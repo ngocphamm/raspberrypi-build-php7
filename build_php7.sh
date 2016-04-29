@@ -22,11 +22,14 @@ make
 
 sudo make install
 
-# Get composer
+# Composer
 cd /opt/php7/bin
 
-sudo rm -f composer.phar
+# Get composer if it's not available yet
+if [ ! -f composer.phar ]; then
+    sudo wget https://getcomposer.org/download/1.0.0/composer.phar
+    sudo chmod +x composer.phar
+fi
 
-sudo wget https://getcomposer.org/download/1.0.1/composer.phar
-
-sudo chmod +x composer.phar
+# Try to update to latest version
+sudo php composer.phar self-update

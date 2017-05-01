@@ -8,7 +8,13 @@ VERSION=$1
 # sudo apt-get install build-essential
 # sudo apt-get install libfcgi-dev libfcgi0ldbl libjpeg62-turbo-dbg libmcrypt-dev libssl-dev libc-client2007e libc-client2007e-dev libxml2-dev libbz2-dev libcurl4-openssl-dev libjpeg-dev libpng12-dev libfreetype6-dev libkrb5-dev libpq-dev libxml2-dev libxslt1-dev
 
-cd /home/pi/Downloads/BuildSrc/php7
+BUILD_DIR=/home/pi/Downloads/BuildSrc/php7
+PHP_DIR=/opt/php7
+
+mkdir -p $BUILD_DIR
+mkdir -p $PHP_DIR
+
+cd $BUILD_DIR
 
 wget http://php.net/distributions/php-${VERSION}.tar.bz2 .
 
@@ -23,7 +29,7 @@ make
 sudo make install
 
 # Composer
-cd /opt/php7/bin
+cd $PHP_DIR/bin
 
 # Get composer if it's not available yet
 if [ ! -f composer.phar ]; then
@@ -32,4 +38,9 @@ if [ ! -f composer.phar ]; then
 fi
 
 # Try to update to latest version
-sudo php composer.phar self-update
+sudo $PHP_DIR/bin/php composer.phar self-update
+
+# Link composer.phar if needed
+if [ ! -L /usr/local/bin/composer ]; then
+    sudo ln -s $PHP_DIR/bin/composer.phar /usr/local/bin/composer
+fi

@@ -16,6 +16,15 @@ mkdir -p $PHP_DIR
 
 cd $BUILD_DIR
 
+# Clean up
+if [ -f "php-${VERSION}.tar.bz2" ]; then
+  rm -f "php-${VERSION}.tar.bz2"
+fi
+
+if [ -d "php-${VERSION}" ]; then
+  rm -rf "php-${VERSION}"
+fi
+
 wget http://php.net/distributions/php-${VERSION}.tar.bz2 .
 
 tar jxf php-${VERSION}.tar.bz2
@@ -33,8 +42,8 @@ cd $PHP_DIR/bin
 
 # Get composer if it's not available yet
 if [ ! -f composer.phar ]; then
-    sudo wget https://getcomposer.org/download/1.0.0/composer.phar
-    sudo chmod +x composer.phar
+  sudo wget https://getcomposer.org/download/1.0.0/composer.phar
+  sudo chmod +x composer.phar
 fi
 
 # Try to update to latest version
